@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 
-export default class Recipes extends React.Component {
+export default class MyRecipes extends React.Component {
     state = {
         recipes: []
     }
     
     componentDidMount() {
         // axios.get(`https://jsonplaceholder.typicode.com/users`)
-        axios.get(`https://cityinfoapi-1.azurewebsites.net/api/cities`)
+        axios.get(`https://hnhapi01.azurewebsites.net/api/cookbooks/2/recipes`)
         .then(res => {
             const recipes = res.data;
             this.setState({ recipes });
@@ -37,28 +37,28 @@ export default class Recipes extends React.Component {
                 </td>
                 <td>
                     <FontAwesomeIcon icon={faEdit} onClick={this.handleEdit}/>
-                    <FontAwesomeIcon icon={faTrashAlt} onClick={this.handleDelete}/>
+                    <FontAwesomeIcon icon={faTrashAlt} onClick={this.handleDelete(recipe.id)}/>
                 </td>
             </tr>
             )
         })
     };
 
-    handleDelete = (e) => {  
+    handleDelete = (id) => {  
         // this.setState({ recipes: e.target.value })
-        console.log(e)
+        console.log(id)
             // e.preventDefault();
         
-            // axios.delete(`https://cityinfoapi-1.azurewebsites.net/api/cities/${this.state.recipes.id}`)
-            //   .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            //   })
+            axios.delete(`hhttps://hnhapi01.azurewebsites.net/api/cookbooks/2/recipes/${id}`)
+              .then(res => {
+                console.log(res);
+                console.log(res.data);
+              })
       }
 
     handleEdit () {
         // alert('edit')
-        // axios.delete('https://cityinfoapi-1.azurewebsites.net/api/cities')
+        // axios.delete('https://hnhapi01.azurewebsites.net/api/cookbooks/2/recipes')
         //   .then(response => console.log(response))
       }
 
