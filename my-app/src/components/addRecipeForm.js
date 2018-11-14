@@ -11,6 +11,7 @@ import { Button,
  } from 'react-bootstrap';
 
 
+
 export default class AddRecipeForm extends React.PureComponent {
         constructor(props) {
           super(props);
@@ -18,10 +19,10 @@ export default class AddRecipeForm extends React.PureComponent {
           this.state = {
             show: false,
             name: '',
-            contributor: '',
-            description: '',
-            ingredients: '',
-            method: '',
+            contributor: ' ',
+            description: ' ',
+            ingredients: ' ',
+            method: ' ',
           };
         }
       
@@ -36,17 +37,14 @@ export default class AddRecipeForm extends React.PureComponent {
         handleChange = (e) => {
             // console.log(e.target)
             this.setState({ 
-                [e.target.name]: e.target.name,
-                [e.target.contributor]: e.target.contributor,
-                [e.target.description]: e.target.description,
-                [e.target.ingredients]: e.target.ingredients,
-                [e.target.method]: e.target.method,
+                [e.target.name]: e.target.value
             });
            
           }
 
         handleSubmit = (e) => {
             console.log("state=", this.state.name)
+            this.setState({ show: false })
         axios.post(`https://hnhapi01.azurewebsites.net/api/cookbooks/1/recipes/`, {
             name: this.state.name,
             contributor: this.state.contributor,
@@ -86,7 +84,8 @@ export default class AddRecipeForm extends React.PureComponent {
                         >
                         <ControlLabel>Recipe Name</ControlLabel>
                         <input
-                            type="text"
+                            type="name"
+                            id="name"
                             name="name"
                             value={this.state.name}
                             placeholder="Enter text"
@@ -100,7 +99,8 @@ export default class AddRecipeForm extends React.PureComponent {
                         >
                         <ControlLabel>Your Name</ControlLabel>
                         <input
-                            type="text"
+                            type="contributor"
+                            id="contributor"
                             name="contributor"
                             value={this.state.contributor}
                             placeholder="Enter text"
@@ -114,7 +114,8 @@ export default class AddRecipeForm extends React.PureComponent {
                         >
                         <ControlLabel>Recipe Description</ControlLabel>
                         <input
-                            type="text"
+                            type="description"
+                            id="description"
                             name="description"
                             value={this.state.description}
                             placeholder="Enter text"
@@ -128,7 +129,8 @@ export default class AddRecipeForm extends React.PureComponent {
                         >
                         <ControlLabel>Recipe Ingredients</ControlLabel>
                         <input
-                            type="text"
+                            type="ingredients"
+                            id="ingredients"
                             name="ingredients"
                             value={this.state.ingredients}
                             placeholder="Enter text"
@@ -143,6 +145,7 @@ export default class AddRecipeForm extends React.PureComponent {
                         <ControlLabel>Recipe Method</ControlLabel>
                         <input
                             type="text"
+                            id="method"
                             name="method"
                             value={this.state.method}
                             placeholder="Enter text"
